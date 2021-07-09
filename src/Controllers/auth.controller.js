@@ -21,7 +21,7 @@ export const signin = (req, res) =>{
     mysqlconnection.query(`CALL logginAccount(?)`,[userName],(err, rows, fields) =>{
         if(!err){
             const userfound = rows[0];
-            if(!userfound)
+            if(userfound.length == 0)
             {
                 return res.status(400).json({
                     code:config.user_Not_Found_Code, 
@@ -30,7 +30,9 @@ export const signin = (req, res) =>{
                 });
             }
             else{ 
-                const pass = encripto.compare(userPass,userfound.userPass);
+                const pass = encripto.comparePass(userPass,userfound.userPass);
+                // encripto.comparePass
+                console.log("probar"+pass);
                 if(!pass){
                     return res.status(401).json({
                         code:config.error_Code, 
