@@ -11,11 +11,10 @@ router.get('/:id', businesscontroller.GetById);
 
 //Create
 router.post('/',
-    //[
-    // authjwt.verifyToken,validator.checkUserNameNoneRepeat,
-    // validator.checkRoleExisted,validator.isUserValid,validator.isPassValid,
-    // validator.IsmailValid, validator.EmailNoneRepeat,validator.PhoneNoneRepeat
-    // ],
+// [authjwt.verifyToken,validator.checkUserNameNoneRepeat,
+//     validator.checkRoleExisted,validator.isUserValid,validator.isPassValid,
+//     validator.IsmailValid, validator.EmailNoneRepeat,validator.PhoneNoneRepeat
+//     ],
     businesscontroller.Post);
 
 //Update
