@@ -10,7 +10,6 @@ export const GetAll = (req, res) =>{
         }
     });    
 }
-
 export const GetById = (req, res) =>{ 
         const { id } = req.params;
     mysqlconnection.query('SELECT * FROM businesses where state = 1 and id =?',[id], (err, rows, fields) =>{
@@ -23,16 +22,15 @@ export const GetById = (req, res) =>{
         }
     });    
 }
-
 export const Post = (req, res) =>{
     
-    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName } = req.body;
+    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userName, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName } = req.body;
     const query = `
-    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
     const pass = ""; 
     encripto.encryptPassword(userPass).then(val =>{
-        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val ], (err, rows, fields) =>{
+        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userName, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val ], (err, rows, fields) =>{
             if(!err){          
                 return res.json({
                     status: 201,
@@ -43,9 +41,9 @@ export const Post = (req, res) =>{
                 res.json(err);
             }
         });
-    });   
+    });
+   
 }
-
 export const Put = (req, res) =>{
     const { businessName, address, logo, idCountry, idProvince, idcity, phoneBusiness, idCountryuser, idProvinceuser, idcityuser} = req.body;
     const { id } = req.params;
@@ -64,7 +62,6 @@ export const Put = (req, res) =>{
         }
     });
 }
-
 export const Delete = (req, res) =>{  
     const { id } = req.params;
     mysqlconnection.query('UPDATE businesses SET state = 2 WHERE id =?',[id], (err, rows, fields) =>{
