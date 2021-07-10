@@ -10,6 +10,7 @@ export const GetAll = (req, res) =>{
         }
     });    
 }
+
 export const GetById = (req, res) =>{ 
         const { id } = req.params;
     mysqlconnection.query('SELECT * FROM businesses where state = 1 and id =?',[id], (err, rows, fields) =>{
@@ -22,18 +23,12 @@ export const GetById = (req, res) =>{
         }
     });    
 }
+
 export const Post = (req, res) =>{
     
     const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userName, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName } = req.body;
     const query = `
     CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-    `
-    const pass = ""; 
-    encripto.encryptPassword(userPass).then(val =>{
-        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userName, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val ], (err, rows, fields) =>{
-    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil } = req.body;
-    const query = `
-    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
     const pass = ""; 
     encripto.encryptPassword(userPass).then(val =>{
