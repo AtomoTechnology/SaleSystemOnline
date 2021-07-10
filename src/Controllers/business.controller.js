@@ -26,9 +26,9 @@ export const GetById = (req, res) =>{
 
 export const Post = (req, res) =>{
     
-    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userName, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName } = req.body;
+    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil } = req.body;
     const query = `
-    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
     const pass = ""; 
     encripto.encryptPassword(userPass).then(val =>{

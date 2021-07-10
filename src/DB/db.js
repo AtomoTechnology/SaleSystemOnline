@@ -3,8 +3,8 @@ import mysql from 'mysql';
 const mysqlconnection = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'root',
-    database:'onlinesystem',
+    password:'',
+    database:'onlinedatabase',
     insecureAuth : true
 });
 mysqlconnection.connect( (err) =>{
