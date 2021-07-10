@@ -15,7 +15,7 @@ import cors from 'cors';
 const app = express();
 
 //Settings
-app.set('port',process.env.PORT || 3000)
+app.set('port',process.env.PORT || 5000)
 app.set('pkg',pkg)
 
 //Middlewares

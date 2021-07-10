@@ -33,7 +33,7 @@ export const createUser = (req, res) =>{
             if(!err){          
                 return res.json({
                     status: 201,
-                    message:'El usuario fue guardo con exito'
+                    message:'El usuario fue guardo con exito '
                 });
             }
             else{
