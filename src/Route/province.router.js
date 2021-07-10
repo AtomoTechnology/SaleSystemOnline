@@ -4,10 +4,10 @@ import * as provincecontroller from '../Controllers/province.controller';
 const router = Router();
 
 //Get All user
-router.get('/',[authjwt.verifyToken, authjwt.isAdmin],provincecontroller.GetALl);
-
+router.get('/',provincecontroller.GetALl);
+// [authjwt.verifyToken, authjwt.isAdmin],
 //Get by id
-router.get('/:id',[authjwt.verifyToken, authjwt.isAdmin], provincecontroller.GetById);
+router.get('/:id', provincecontroller.GetById);
 
 //Create
 router.post('/',[authjwt.verifyToken, authjwt.isAdmin],provincecontroller.Post);
