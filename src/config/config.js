@@ -6,5 +6,6 @@ export default {
     token_Error_Code:301,
     connection_Error_Code:302,
     user_Not_Found_Code:303,
-    access_error_Code:304
+    access_error_Code:304,
+    invalid_error_Code:305
 }

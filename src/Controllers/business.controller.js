@@ -26,21 +26,22 @@ export const GetById = (req, res) =>{
 
 export const Post = (req, res) =>{
     
-    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil } = req.body;
+    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil, e_mailaccount } = req.body;
     const query = `
-    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
     const pass = ""; 
     encripto.encryptPassword(userPass).then(val =>{
-        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val, postal_code, e_mail, cuit_cuil ], (err, rows, fields) =>{
-            if(!err){          
+        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val, postal_code, e_mail, cuit_cuil, e_mailaccount ], (err, rows, fields) =>{
+            let result =rows[0];
+            if(result[0].status != "303"){          
                 return res.json({
-                    status: 201,
-                    message:'El negocio fue guardo con exito' + " Rows " + res.json(rows[0]) 
+                    status: result[0].status,
+                    message:result[0].message 
                 });
             }
             else{
-                res.json(err);
+               return res.json(result);
             }
         });
     });
