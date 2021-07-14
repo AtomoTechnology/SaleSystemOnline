@@ -8,6 +8,7 @@ import locationRoute from '../Route/location.router';
 import roleRoute from '../Route/role.router';
 import countryRoute from '../Route/country.router';
 import provinceRoute from '../Route/province.router';
+import businessRoute from '../Route/business.router';
 // End call Route
 import pkg from '../../package.json';
 import helmet from 'helmet';
@@ -40,6 +41,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/users', userRoute);
+app.use('/api/businesses', businessRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/locations', locationRoute);
 app.use('/api/roles', roleRoute);
