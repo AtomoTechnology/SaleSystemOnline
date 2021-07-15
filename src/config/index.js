@@ -40,13 +40,13 @@ app.use(helmet());
 app.use(express.json());
 
 //Routes
-app.use('/api/users', userRoute);
-app.use('/api/businesses', businessRoute);
-app.use('/api/auth', authRoute);
-app.use('/api/locations', locationRoute);
-app.use('/api/roles', roleRoute);
-app.use('/api/countries', countryRoute);
-app.use('/api/provinces', provinceRoute);
+app.use('/api/v1/users', userRoute);
+app.use('/api/v1/businesses', businessRoute);
+app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/locations', locationRoute);
+app.use('/api/v1/roles', roleRoute);
+app.use('/api/v1/countries', countryRoute);
+app.use('/api/v1/provinces', provinceRoute);
 
 //Starting
 app.listen(app.get('port'), () =>{

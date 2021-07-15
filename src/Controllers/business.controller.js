@@ -1,5 +1,7 @@
 import * as encripto from '../Helpers/Cryptographies'
 import mysqlconnection from '../DB/db'; 
+import config from '../config/config';
+
 export const GetAll = (req, res) =>{
     mysqlconnection.query('SELECT * FROM businesses where state = 1 ORDER BY id DESC',(err, rows, fields) =>{
         if(!err){
@@ -48,16 +50,13 @@ export const Post = (req, res) =>{
    
 }
 export const Put = (req, res) =>{
-    const { businessName, address, logo, idCountry, idProvince, idcity, phoneBusiness, idCountryuser, idProvinceuser, idcityuser} = req.body;
-    const { id } = req.params;
-    const query = `
-    CALL UpdateBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-    `
-    mysqlconnection.query(query,[id, businessName, address, logo, idCountry, idProvince, idcity, phoneBusiness, idCountryuser, idProvinceuser, idcityuser], (err, rows, fields) =>{
+    const { businessName, cuit_cuil, logo} = req.body;
+    const { id } = req.params;   
+    mysqlconnection.query(`UPDATE businesses SET businessName = '${businessName}',cuit_cuil = '${cuit_cuil}',logo = '${logo}' WHERE id =${[id]}`,(err, rows, fields) =>{
         if(!err){
             res.json({
-                status: 201,
-                message:'El usuario fue modificado con exito'
+                status:config.success_Code, 
+                message:'El negocio fue modificado con exito'
             });
         }
         else{
@@ -65,15 +64,21 @@ export const Put = (req, res) =>{
         }
     });
 }
-export const Delete = (req, res) =>{  
-    const { id } = req.params;
-    mysqlconnection.query('UPDATE businesses SET state = 2 WHERE id =?',[id], (err, rows, fields) =>{
+export const Delete = (req, res) =>{   
+    mysqlconnection.query(`CALL deleteBusiness(?)`,[ req.params], (err, rows, fields) =>{
         if(!err){
             res.json({
-                status: 201,
-                message:'El usuario fue eliminado con exito'
+                status:config.success_Code, 
+                message:'El negocio fue eliminado con exito'
             });
         }
+        // let result =rows[0];
+        // if(result[0].status != "303"){          
+        //     return res.json({
+        //         status: result[0].status,
+        //         message:result[0].message 
+        //     });
+        // }
         else{
             res.json(err);
         }

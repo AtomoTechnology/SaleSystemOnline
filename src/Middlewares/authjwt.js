@@ -8,7 +8,7 @@ export const verifyToken = async(req, res, next) =>{
         const token = req.headers["x-access-token"];
         if(!token){
             return res.status(400).json({
-                code:config.token_Error_Code, 
+                status:config.token_Error_Code, 
                 error:"Error token",
                 message:"Token requiere"
             });
@@ -22,8 +22,8 @@ export const verifyToken = async(req, res, next) =>{
         
         const userExist =  mysqlconnection.query('SELECT * FROM accounts where state = 1 and id =?',[req.id]); 
         if(!userExist){
-            return res.status(404).json({
-                code:config.user_Not_Found_Code, 
+            return res.json({
+                status:config.user_Not_Found_Code, 
                 error:"User not found",
                 message:"Usuario no encontrado"
             });
@@ -31,8 +31,8 @@ export const verifyToken = async(req, res, next) =>{
         next();
     }
     catch (e) {
-        return res.status(403).json({
-            code:config.token_Error_Code, 
+        return res.json({
+            status:config.token_Error_Code, 
             error:"Error token",
             message:"No autorizado"
         });
@@ -53,16 +53,16 @@ export const isAdmin = async(req, res, next) => {
                 }
                 else
                 {
-                    return res.status(403).json({
-                        code:config.access_error_Code, 
+                    return res.json({
+                        status:config.access_error_Code, 
                         error:"Error accesso",
                         message:"Requiere acceso administrativo"
                     });  
                 }
             }
             else{
-                return res.status(403).json({
-                    code:config.access_error_Code, 
+                return res.json({
+                    status:config.access_error_Code, 
                     error:"Error accesso",
                     message:"Requiere acceso administrativo"
                 });
@@ -71,8 +71,8 @@ export const isAdmin = async(req, res, next) => {
         
     } 
     catch (error) {
-        return res.status(403).json({
-            code:config.access_error_Code, 
+        return res.json({
+            status:config.access_error_Code, 
             error:"error",
             message:"Acceso no permitido"
         });

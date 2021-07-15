@@ -19,9 +19,11 @@ router.post('/',
     businesscontroller.Post);
 
 //Update
-router.put('/:id',[authjwt.verifyToken, authjwt.isAdmin,validator.checkRoleExisted, validator.IsmailValid], businesscontroller.Put);
+router.put('/:id',[authjwt.verifyToken, authjwt.isAdmin,validator.checkRoleExisted], businesscontroller.Put);
 
 //Delete
-router.delete('/:id',[authjwt.verifyToken, authjwt.isAdmin], businesscontroller.Delete);
+router.delete('/:id',
+// [authjwt.verifyToken, authjwt.isAdmin], 
+businesscontroller.Delete);
 
 module.exports = router;
