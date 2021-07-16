@@ -2,7 +2,7 @@ import mysqlconnection from '../DB/db';
 import config from '../config/config';
 
 export const checkUserNameNoneRepeat = (req, res, next) => {
-    mysqlconnection.query('SELECT * FROM accounts where userName =?',[req.body.userName], (err, rows, fields) =>{         
+    mysqlconnection.query('SELECT * FROM accounts where state = 1 and userName =?',[req.body.userName], (err, rows, fields) =>{         
         if(rows.length > 0){
             return res.json({
                 status:config.error_Code, 
@@ -17,7 +17,7 @@ export const checkUserNameNoneRepeat = (req, res, next) => {
 }
 
 export const checkLocationNoneRepeat = (req, res, next) => {
-    mysqlconnection.query('SELECT * FROM locations where name =?',[req.body.name], (err, rows, fields) =>{         
+    mysqlconnection.query('SELECT * FROM locations where state = 1 and name =?',[req.body.name], (err, rows, fields) =>{         
         if(rows.length > 0){
             return res.status(401).json({
                 error:"error",
@@ -31,7 +31,7 @@ export const checkLocationNoneRepeat = (req, res, next) => {
 }
 
 export const checkDocumentNoneRepeat = (req, res, next) => {
-    mysqlconnection.query('SELECT * FROM accounts where name =?',[req.body.name], (err, rows, fields) =>{         
+    mysqlconnection.query('SELECT * FROM accounts where state = 1 and name =?',[req.body.name], (err, rows, fields) =>{         
         if(rows.length > 0){
             return res.status(400).json({
                 error:"error",
@@ -92,7 +92,7 @@ export const checkRoleUpdateExisted = (req, res, next) => {
 
 export const checkCorrectChangePass = (req, res, next) => {    
     const { userName, userPass, olduserPass} = req.body;
-    mysqlconnection.query('SELECT * FROM accounts where userName =?',[userName], (err, rows, fields) =>{   
+    mysqlconnection.query('SELECT * FROM accounts where state = 1 and userName =?',[userName], (err, rows, fields) =>{   
         if(!err){
             const userfound = rows[0];
             if(!userfound)
@@ -176,7 +176,7 @@ export const EmailNoneRepeatBusiness = (req, res, next) =>{
 }
 
 export const PhoneNoneRepeat = (req, res, next) =>{
-    mysqlconnection.query('SELECT * FROM users WHERE phone =?', [req.body.phoneuser], (err, rows, fields) =>{     
+    mysqlconnection.query('SELECT * FROM users WHERE state = 1 and phone =?', [req.body.phoneuser], (err, rows, fields) =>{     
         if(rows.length > 0){
             return res.json({
                 status:config.invalid_error_Code,
@@ -191,7 +191,7 @@ export const PhoneNoneRepeat = (req, res, next) =>{
 }
 
 export const PhoneBusinesNoneRepeat = (req, res, next) =>{
-    mysqlconnection.query('SELECT * FROM phones WHERE phones =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
+    mysqlconnection.query('SELECT * FROM phones WHERE state = 1 and phones =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
         if(rows.length > 0){
             return res.json({
                 status:config.invalid_error_Code,

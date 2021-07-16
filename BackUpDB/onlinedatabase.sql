@@ -49,7 +49,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (10,1,1,'prade516','$2a$10$kJFciKkGeOPksTMEc6c46uvGHIgXCCYD6fniC9H.w7.edJ9a817sO','prade516@gmail.com','2021-07-13 00:00:00',NULL,'1');
+INSERT INTO `accounts` VALUES (10,1,1,'prade516','$2a$10$kJFciKkGeOPksTMEc6c46uvGHIgXCCYD6fniC9H.w7.edJ9a817sO','prade516@gmail.com','2021-07-13 00:00:00',NULL,'2');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (68,1,1,1,2),(69,1,1,1,1);
+INSERT INTO `locations` VALUES (68,1,1,1,2),(69,1,1,1,2);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +261,7 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-INSERT INTO `phones` VALUES (4,5,'32134',1),(5,7,'32134',1),(6,8,'32134',1),(7,9,'32134',1);
+INSERT INTO `phones` VALUES (7,9,'32134',2);
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +380,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (8,10,69,'4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D','DNI','19032740',1);
+INSERT INTO `users` VALUES (8,10,69,'4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D','DNI','19032740',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -510,12 +510,13 @@ begin
 	END;
 
 	START TRANSACTION;
-    update location loc inner join branches bra on loc.id = bra.idBranch
+    SET SQL_SAFE_UPDATES = 0;
+	update locations loc inner join branches bra on loc.id = bra.idLocation
     inner join businesses bus on bra.idBusiness = bus.id 
     inner join branchusers branusr on  bra.id = branusr.idBranch
     inner join accounts acc on acc.id = branusr.idAccount
     inner join phones ph on ph.idBranch = bra.id
-    inner join users usr on usr.idAccount = bra.id
+    inner join users usr on usr.idAccount = acc.id
     inner join locations locusr on locusr.id = usr.idLocation
     set loc.state = 2, bra.state = 2, bus.state = 2, acc.state = 2, 
     branusr.state = 2, ph.state = 2, usr.state= 2, locusr.state = 2  where bra.idBusiness = id;
@@ -596,4 +597,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-15  0:33:52
+-- Dump completed on 2021-07-15 22:53:06

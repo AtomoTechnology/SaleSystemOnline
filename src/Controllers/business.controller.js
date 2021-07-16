@@ -65,20 +65,16 @@ export const Put = (req, res) =>{
     });
 }
 export const Delete = (req, res) =>{   
-    mysqlconnection.query(`CALL deleteBusiness(?)`,[ req.params], (err, rows, fields) =>{
-        if(!err){
-            res.json({
-                status:config.success_Code, 
-                message:'El negocio fue eliminado con exito'
+    const {id} = req.params;
+    mysqlconnection.query(`CALL deleteBusiness(?)`,[id], (err, rows, fields) =>{
+       
+        let result =rows[0];
+        if(result[0].status != "303"){          
+            return res.json({
+                status: result[0].status,
+                message:result[0].message 
             });
         }
-        // let result =rows[0];
-        // if(result[0].status != "303"){          
-        //     return res.json({
-        //         status: result[0].status,
-        //         message:result[0].message 
-        //     });
-        // }
         else{
             res.json(err);
         }
