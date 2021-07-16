@@ -6,9 +6,11 @@ import userRoute from '../Route/user.route';
 import authRoute from '../Route/auth.router';
 import locationRoute from '../Route/location.router';
 import roleRoute from '../Route/role.router';
+import cityRoute from '../Route/city.router';
 import countryRoute from '../Route/country.router';
 import provinceRoute from '../Route/province.router';
 import businessRoute from '../Route/business.router';
+import documentTypeRoute from '../Route/documentType.router';
 // End call Route
 import pkg from '../../package.json';
 import helmet from 'helmet';
@@ -44,7 +46,9 @@ app.use('/api/v1/users', userRoute);
 app.use('/api/v1/businesses', businessRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/locations', locationRoute);
+app.use('/api/v1/documenttypes', documentTypeRoute);
 app.use('/api/v1/roles', roleRoute);
+app.use('/api/v1/cities', cityRoute);
 app.use('/api/v1/countries', countryRoute);
 app.use('/api/v1/provinces', provinceRoute);
 

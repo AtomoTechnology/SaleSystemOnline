@@ -28,13 +28,13 @@ export const GetById = (req, res) =>{
 
 export const Post = (req, res) =>{
     
-    const { businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil, e_mailaccount } = req.body;
+    const { businessName, firstName, lastName, address, addressuser, idDocumentType, docNumber, logo, userPass, idCountry, idProvince, idcity, phoneBusiness, phoneuser, idRole, idCountryuser, idProvinceuser, idcityuser, userName, postal_code, e_mail, cuit_cuil, e_mailaccount } = req.body;
     const query = `
     CALL createBusiness(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
     const pass = ""; 
     encripto.encryptPassword(userPass).then(val =>{
-        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, typeDocument, docNumber, logo, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val, postal_code, e_mail, cuit_cuil, e_mailaccount ], (err, rows, fields) =>{
+        mysqlconnection.query(query,[businessName, firstName, lastName, address, addressuser, idDocumentType, docNumber, logo, idCountry, idProvince,idcity, phoneBusiness, phoneuser, idRole,idCountryuser, idProvinceuser, idcityuser, userName,val, postal_code, e_mail, cuit_cuil, e_mailaccount ], (err, rows, fields) =>{
             let result =rows[0];
             if(result[0].status != "303"){          
                 return res.json({

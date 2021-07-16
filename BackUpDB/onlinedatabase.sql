@@ -49,7 +49,6 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (10,1,1,'prade516','$2a$10$kJFciKkGeOPksTMEc6c46uvGHIgXCCYD6fniC9H.w7.edJ9a817sO','prade516@gmail.com','2021-07-13 00:00:00',NULL,'2');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +81,6 @@ CREATE TABLE `branches` (
 
 LOCK TABLES `branches` WRITE;
 /*!40000 ALTER TABLE `branches` DISABLE KEYS */;
-INSERT INTO `branches` VALUES (9,60,68,'Ovidio Lagos 124','prade516@gmail.com','2000',2);
 /*!40000 ALTER TABLE `branches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +112,6 @@ CREATE TABLE `branchusers` (
 
 LOCK TABLES `branchusers` WRITE;
 /*!40000 ALTER TABLE `branchusers` DISABLE KEYS */;
-INSERT INTO `branchusers` VALUES (7,9,10,2);
 /*!40000 ALTER TABLE `branchusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +140,6 @@ CREATE TABLE `businesses` (
 
 LOCK TABLES `businesses` WRITE;
 /*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
-INSERT INTO `businesses` VALUES (60,'AtomoTecho modificado','20-19032740-0','Sin logo modificado',2);
 /*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +198,32 @@ INSERT INTO `countries` VALUES (1,'Argentina',1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `documenttypes`
+--
+
+DROP TABLE IF EXISTS `documenttypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `documenttypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `documenttypes`
+--
+
+LOCK TABLES `documenttypes` WRITE;
+/*!40000 ALTER TABLE `documenttypes` DISABLE KEYS */;
+INSERT INTO `documenttypes` VALUES (1,'DNI','El DNI contiene información sobre su identidad. Pero, lo más importante es que este documento tiene un número personal. El número del DNI es necesario',1),(2,'PASAPORTE','PASAPORTE',1),(3,'L.C','Libreta Cívica',1),(4,'L.E.','Libreta de Enrolamiento',1);
+/*!40000 ALTER TABLE `documenttypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `locations`
 --
 
@@ -235,7 +257,6 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (68,1,1,1,2),(69,1,1,1,2);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +282,6 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-INSERT INTO `phones` VALUES (7,9,'32134',2);
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,19 +378,21 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idAccount` int(11) NOT NULL,
   `idLocation` int(11) NOT NULL,
+  `idDocumentType` int(11) DEFAULT NULL,
+  `docNumber` varchar(15) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `address` varchar(150) DEFAULT NULL,
-  `typeDocument` varchar(20) DEFAULT NULL,
-  `docNumber` varchar(15) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idAccount_user` (`idAccount`),
   KEY `idLocation_idx` (`idLocation`),
   KEY `idLocation_user` (`idLocation`),
+  KEY `idDocumentType_user` (`idDocumentType`),
   CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`),
-  CONSTRAINT `idAccout` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`)
+  CONSTRAINT `idAccout` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
+  CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,7 +402,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (8,10,69,'4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D','DNI','19032740',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,7 +420,7 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createBusiness`(
 	in businessName varchar(200), in firstName varchar(50), in lastName varchar(50), 
-	in address varchar(100),in addressuser varchar(150), in typeDocument varchar(20), in docNumber varchar(20), in logo varchar(5000),
+	in address varchar(100),in addressuser varchar(150), in idDocumentType int, in docNumber varchar(20), in logo varchar(5000),
 	in idCountry int, in idProvince int, in idCity int, in phoneBusiness varchar(20),
     in phoneuser varchar(20), in idRole int, in idCountryuser int, in idProvinceuser int, in idcityuser int, in userName varchar(50), 
     in userPass varchar(500), in postal_code varchar(15), in e_mail varchar(25), in cuit_cuil varchar(15), in e_mailaccount varchar(50))
@@ -444,8 +465,8 @@ begin
     values(idCountryuser, idProvinceuser, idCityuser,1);
     SET idLocationuser = (SELECT LAST_INSERT_ID());
     
-    insert into users(idAccount, idLocation, phone, firstName, lastName, address, typeDocument, docNumber, state)
-    values(_idaccount, idLocationuser, phoneuser, firstName, lastName, addressuser, typeDocument, docNumber, 1);
+    insert into users(idAccount, idLocation, phone, firstName, lastName, address, idDocumentType, docNumber, state)
+    values(_idaccount, idLocationuser, phoneuser, firstName, lastName, addressuser, idDocumentType, docNumber, 1);
    
     SELECT '203' AS status, "El negocio fue guardo con exito" AS message;
    COMMIT;
@@ -597,4 +618,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-15 22:53:06
+-- Dump completed on 2021-07-15 23:44:42

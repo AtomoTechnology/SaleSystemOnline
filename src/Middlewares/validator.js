@@ -31,7 +31,7 @@ export const checkLocationNoneRepeat = (req, res, next) => {
 }
 
 export const checkDocumentNoneRepeat = (req, res, next) => {
-    mysqlconnection.query('SELECT * FROM accounts where state = 1 and name =?',[req.body.name], (err, rows, fields) =>{         
+    mysqlconnection.query('SELECT * FROM users where state = 1 and docNumber =?',[req.body.docNumber], (err, rows, fields) =>{         
         if(rows.length > 0){
             return res.status(400).json({
                 error:"error",
