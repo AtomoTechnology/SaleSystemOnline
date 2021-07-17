@@ -4,7 +4,7 @@ import * as countrycontroller from '../Controllers/country.controller';
 const router = Router();
 
 //Get All user
-router.get('/',countrycontroller.GetALl);
+router.get('/',countrycontroller.GetAll);
 
 //Get by id
 router.get('/:id',[authjwt.verifyToken, authjwt.isAdmin], countrycontroller.GetById);

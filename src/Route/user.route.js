@@ -10,13 +10,10 @@ router.get('/',usercontroller.getUser);
 router.get('/:id', usercontroller.GetById);
 
 //Create
-router.post('/',
-    //[
-    // authjwt.verifyToken,validator.checkUserNameNoneRepeat,
-    // validator.checkRoleExisted,validator.isUserValid,validator.isPassValid,
-    // validator.IsmailValid, validator.EmailNoneRepeat,validator.PhoneNoneRepeat
-    // ],
-    usercontroller.createUser);
+router.post('/',[validator.checkUserNameNoneRepeat,
+    validator.checkRoleExisted,validator.isUserValid,validator.isPassValid,
+    validator.IsmailValid, validator.EmailNoneRepeat,validator.PhoneNoneRepeat
+    ],usercontroller.createUser);
 
 //Update
 router.put('/:id',[authjwt.verifyToken, authjwt.isAdmin,validator.checkRoleExisted, validator.IsmailValid], usercontroller.updateUser);

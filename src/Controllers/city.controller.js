@@ -29,7 +29,7 @@ export const GetById = (req, res) =>{
 }
 export const Post = (req, res) =>{
     const { name, description} = req.body;
-    const query = "INSERT INTO cities (idProvince,name, state) VALUES ?";
+    const query = "INSERT INTO cities (idProvince, name, description, state) VALUES ?";
     var values = [[idProvince,name, description, 1]];
     
     mysqlconnection.query(query,[values], (err, rows, fields) =>{
@@ -46,9 +46,9 @@ export const Post = (req, res) =>{
    
 }
 export const Put = (req, res) =>{
-    const { name, description } = req.body;
+    const { name, description,idProvince } = req.body;
     const { id } = req.params;   
-    mysqlconnection.query(`UPDATE cities SET name = '${name}', idProvince = '${idProvince} WHERE id =${[id]}`, (err, rows, fields) =>{
+    mysqlconnection.query(`UPDATE cities SET name = '${name}', description = '${description}', idProvince = ${idProvince} WHERE id =${[id]}`, (err, rows, fields) =>{
         if(!err){
             res.json({
                 status: 201,

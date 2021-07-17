@@ -1,6 +1,7 @@
 import mysqlconnection from '../DB/db'; 
+import config from '../config/config';
 export const GetAll = (req, res) =>{
-    mysqlconnection.query('SELECT * FROM countries where state = 1 ORDER BY id DESC',(err, rows, fields) =>{
+    mysqlconnection.query('SELECT * FROM categories where state = 1 ORDER BY id DESC',(err, rows, fields) =>{
         if(!err){
             res.json(rows);
         }
@@ -11,7 +12,7 @@ export const GetAll = (req, res) =>{
 }
 export const GetById = (req, res) =>{    
         const { id } = req.params;
-    mysqlconnection.query('SELECT * FROM countries where state = 1 and id =?',[id], (err, rows, fields) =>{
+    mysqlconnection.query('SELECT * FROM categories where state = 1 and id =?',[id], (err, rows, fields) =>{
         if(!err){
             res.json(rows[0]);
         }
@@ -22,14 +23,14 @@ export const GetById = (req, res) =>{
 }
 export const Post = (req, res) =>{
     const { name, description} = req.body;
-    const query = "INSERT INTO countries (name, description, state) VALUES ?";
+    const query = "INSERT INTO categories (name, description, state) VALUES ?";
     var values = [[name, description, 1]];
     
     mysqlconnection.query(query,[values], (err, rows, fields) =>{
         if(!err){          
             return res.json({
-                status: 201,
-                message:'El pais fue guardo con exito'
+                status:config.success_Code, 
+                message:'La categoria fue guarda con exito'
             });
         }
         else{
@@ -41,11 +42,11 @@ export const Post = (req, res) =>{
 export const Put = (req, res) =>{
     const { name, description } = req.body;
     const { id } = req.params;   
-    mysqlconnection.query(`UPDATE countries SET name = '${name}', description = '${description}' WHERE id =${[id]}`, (err, rows, fields) =>{
+    mysqlconnection.query(`UPDATE categories SET name = '${name}', description = '${description}' WHERE id =${[id]}`, (err, rows, fields) =>{
         if(!err){
             res.json({
-                status: 201,
-                message:'El pais fue modificado con exito'
+                status:config.success_Code,
+                message:'La categoria fue modificada con exito'
             });
         }
         else{
@@ -55,11 +56,11 @@ export const Put = (req, res) =>{
 }
 export const Delete = (req, res) =>{  
     const { id } = req.params;
-    mysqlconnection.query('UPDATE countries SET state = 2 WHERE id =?',[id], (err, rows, fields) =>{
+    mysqlconnection.query('UPDATE categories SET state = 2 WHERE id =?',[id], (err, rows, fields) =>{
         if(!err){
             res.json({
-                status: 201,
-                message:'El pais fue eliminado con exito'
+                status:config.success_Code,
+                message:'La categoria fue eliminada con exito'
             });
         }
         else{

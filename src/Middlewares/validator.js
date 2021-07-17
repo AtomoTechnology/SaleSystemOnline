@@ -191,7 +191,7 @@ export const PhoneNoneRepeat = (req, res, next) =>{
 }
 
 export const PhoneBusinesNoneRepeat = (req, res, next) =>{
-    mysqlconnection.query('SELECT * FROM phones WHERE state = 1 and phones =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
+    mysqlconnection.query('SELECT * FROM phones WHERE state = 1 and phonenumber =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
         if(rows != null){
             return res.json({
                 status:config.invalid_error_Code,
@@ -281,4 +281,19 @@ export const IsmailaccountValid = (req, res, next) => {
     else{
         next();
     }
+}
+
+export const CategoryNameNoneRepeat = (req, res, next) =>{
+    mysqlconnection.query('SELECT * FROM categories WHERE state = 1 and name =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
+        if(rows != null){
+            return res.json({
+                status:config.invalid_error_Code,
+                error:"error",
+                message:"Hay una categoria con ese nombre"
+            });  
+        }
+        else{
+            next();
+        }  
+    });  
 }
