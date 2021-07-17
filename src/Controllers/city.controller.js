@@ -1,6 +1,13 @@
 import mysqlconnection from '../DB/db'; 
 export const GetALl = (req, res) =>{
-    mysqlconnection.query('SELECT * FROM cities where state = 1 ORDER BY id DESC',(err, rows, fields) =>{
+    var result ="";
+    if(req.query.idProvince != undefined && req.query.idProvince != "" && req.query.idProvince != null){
+        result = "state = 1 and idProvince = " +req.query.idProvince;
+    }
+    else{
+        result = "state = 1";
+    }
+    mysqlconnection.query(`SELECT * FROM cities where ${result} ORDER BY id DESC`,(err, rows, fields) =>{
         if(!err){
             res.json(rows);
         }

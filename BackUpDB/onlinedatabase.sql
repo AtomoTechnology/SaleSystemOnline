@@ -40,7 +40,7 @@ CREATE TABLE `accounts` (
   KEY `idTypeUser_idx` (`idTypeUser`),
   CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `roles` (`id`),
   CONSTRAINT `idTypeUser` FOREIGN KEY (`idTypeUser`) REFERENCES `typeuserses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +49,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES (11,1,1,'prade516','$2a$10$0FSI/46vUuXE4dRDdvIcs.0U4VAMoOswlKZhsb3kPh4b32qvq5Cuy','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(18,1,2,'prade5_16','$2a$10$WreNSux3dXnvC8KIitJXGuuQbRW4mNvE5dE9oV/SlvVs357AaHRN6','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +73,7 @@ CREATE TABLE `branches` (
   KEY `id_idx2` (`idLocation`),
   CONSTRAINT `idBusiness` FOREIGN KEY (`idBusiness`) REFERENCES `businesses` (`id`),
   CONSTRAINT `idLocation` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,6 +82,7 @@ CREATE TABLE `branches` (
 
 LOCK TABLES `branches` WRITE;
 /*!40000 ALTER TABLE `branches` DISABLE KEYS */;
+INSERT INTO `branches` VALUES (10,62,71,'Ovidio Lagos 124','prade516@gmail.com','2000',1),(11,62,71,'dddd','dddd','233',1);
 /*!40000 ALTER TABLE `branches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +105,7 @@ CREATE TABLE `branchusers` (
   KEY `idAccount_branchusers` (`idAccount`),
   CONSTRAINT `Account_branchuser` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
   CONSTRAINT `Branch_branchuser` FOREIGN KEY (`idBranch`) REFERENCES `branches` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,6 +114,7 @@ CREATE TABLE `branchusers` (
 
 LOCK TABLES `branchusers` WRITE;
 /*!40000 ALTER TABLE `branchusers` DISABLE KEYS */;
+INSERT INTO `branchusers` VALUES (8,10,11,1),(9,11,11,1);
 /*!40000 ALTER TABLE `branchusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +134,7 @@ CREATE TABLE `businesses` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `businessName_UNIQUE` (`businessName`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +143,34 @@ CREATE TABLE `businesses` (
 
 LOCK TABLES `businesses` WRITE;
 /*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
+INSERT INTO `businesses` VALUES (62,'AtomoTecho','20-19032740-0','Sin logo',1);
 /*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Leches','Leches',1),(2,'Cremas de leche, mantecas y margarinas','Cremas de leche, mantecas y margarinas',1),(3,'Quesos untables y ricotas','Quesos untables y ricotas',1),(4,'Postres lácteos y yogures','Postres lácteos y yogures',1),(5,'Masas frescas y levaduras','Masas frescas y levaduras',1),(6,'Fiambres, embutidos y encurtidos','Fiambres, embutidos y encurtidos',1),(7,'Quesos excepto untables y ricotas','Quesos excepto untables y ricotas',1),(8,'Hamburguesas, milanesas y bocaditos de carne, poll','Hamburguesas, milanesas y bocaditos de carne, pollo, cerdo y/o pescado congelados',1),(9,'Vegetales congelados, milanesas y medallones sin c','Vegetales congelados, milanesas y medallones sin carne congelados',1),(10,'Comidas preparadas y panificados congelados','Comidas preparadas y panificados congelados',1),(11,'Helados y postres congelados','Helados y postres congelados',1),(12,'Frutas y verduras','Frutas y verduras',1),(13,'Salsas y aderezos','Salsas y aderezos',1),(14,'Especias y condimentos','Especias y condimentos',1),(15,'Polvo para postres y repostería, y productos de re','Polvo para postres y repostería, y productos de repostería',1),(16,'Conservas y salsas de tomate','Conservas y salsas de tomate',1),(17,'Otras conservas','Otras conservas',1),(18,'Pastas secas','Pastas secas',1),(19,'Arroz','Arroz',1),(20,'Sopas, caldos y puré','Sopas, caldos y puré',1),(21,'Legumbres secas, otras harinas, granos y semillas','Legumbres secas, otras harinas, granos y semillas',1),(22,'Aceites','Aceites',1),(23,'Panes rallados y rebozadores','Panes rallados y rebozadores',1),(24,'Harinas de trigo y premezclas','Harinas de trigo y premezclas',1),(25,'Golosinas, alfajores y chocolates','Golosinas, alfajores y chocolates',1),(26,'Panificados y cereales','Panificados y cereales',1),(27,'Galletitas','Galletitas',1),(28,'Infusiones','Infusiones',1),(29,'Mermeladas, dulces y miel','Mermeladas, dulces y miel',1),(30,'Dulce de leche','Dulce de leche',1),(31,'Endulzantes','Endulzantes',1),(32,'Snacks','Snacks',1),(33,'Jugos','Jugos',1),(34,'Aguas saborizadas','Aguas saborizadas',1),(35,'Gaseosas','Gaseosas',1),(36,'Aguas','Aguas',1),(37,'Bebidas sin alcohol refrigeradas','Bebidas sin alcohol refrigeradas',1),(38,'Cervezas y aperitivos','Cervezas y aperitivos',1),(39,'Vinos y espumantes','Vinos y espumantes',1),(40,'Espirituosas, destilados y licores','Espirituosas, destilados y licores',1),(41,'Bebidas con alcohol refrigeradas','Bebidas con alcohol refrigeradas',1),(42,'Afeitado y depilación','Afeitado y depilación',1),(43,'Colonias y desodorantes corporales, polvos pédicos','Colonias y desodorantes corporales, polvos pédicos y talcos',1),(44,'Jabones de tocador, geles y sales de baño, artícul','Jabones de tocador, geles y sales de baño, artículos de baño',1),(45,'Cremas decolorantes y coloración para el cabello','Cremas decolorantes y coloración para el cabello',1),(46,'Champúes, Acondicionadores, fijadores y productos ','Champúes, Acondicionadores, fijadores y productos para el tratamiento capilar',1),(47,'Cuidado facial y artículos de farmacia','Cuidado facial y artículos de farmacia',1),(48,'Cremas corporales','Cremas corporales',1),(49,'Protectores solares y bronceadores','Protectores solares y bronceadores',1),(50,'Cuidado oral','Cuidado oral',1),(51,'Productos para la higiene del bebé, accesorios par','Productos para la higiene del bebé, accesorios para el bebé y alimentación infantil',1),(52,'Pañales y ropa interior descartable.','Pañales y ropa interior descartable.',1),(53,'Productos de gestión menstrual, toallas para la in','Productos de gestión menstrual, toallas para la incontinencia y cuidado materno',1),(54,'Accesorios de limpieza','Accesorios de limpieza',1),(55,'Accesorios de cocina','Accesorios de cocina',1),(56,'Jabón en pan, prelavado, quitamanchas y perfumes p','Jabón en pan, prelavado, quitamanchas y perfumes para la ropa',1),(57,'Jabones en polvo, jabones líquidos y suavizantes p','Jabones en polvo, jabones líquidos y suavizantes para la ropa',1),(58,'Desodorantes y desinfectantes ambientales','Desodorantes y desinfectantes ambientales',1),(59,'Lavandinas','Lavandinas',1),(60,'Lavavajillas','Lavavajillas',1),(61,'Limpieza de pisos y muebles','Limpieza de pisos y muebles',1),(62,'Limpiadores cremosos, de cocina, de baño y multius','Limpiadores cremosos, de cocina, de baño y multiuso',1),(63,'Insecticidas y repelentes','Insecticidas y repelentes',1),(64,'Papeles','Papeles',1),(65,'Alimentos y accesorios para mascotas','Alimentos y accesorios para mascotas',1);
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -248,7 +278,7 @@ CREATE TABLE `locations` (
   CONSTRAINT `City` FOREIGN KEY (`idCity`) REFERENCES `countries` (`id`),
   CONSTRAINT `Country` FOREIGN KEY (`idCountry`) REFERENCES `countries` (`id`),
   CONSTRAINT `Province` FOREIGN KEY (`idProvince`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,6 +287,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES (71,1,1,1,1),(72,1,1,1,1),(79,1,1,1,1);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +304,7 @@ CREATE TABLE `phones` (
   `phonenumber` varchar(20) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +313,68 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
+INSERT INTO `phones` VALUES (8,10,'32134',1);
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `priceproducts`
+--
+
+DROP TABLE IF EXISTS `priceproducts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `priceproducts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `price` decimal(18,2) NOT NULL,
+  `creationDate` date DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `priceproducts`
+--
+
+LOCK TABLES `priceproducts` WRITE;
+/*!40000 ALTER TABLE `priceproducts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `priceproducts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCategory` int(11) NOT NULL,
+  `idprice` int(11) DEFAULT NULL,
+  `idAccount` int(11) DEFAULT NULL,
+  `code` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `imagen` longtext DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category` (`idCategory`),
+  KEY `price` (`idprice`),
+  CONSTRAINT `category` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `price` FOREIGN KEY (`idprice`) REFERENCES `priceproducts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -393,7 +485,7 @@ CREATE TABLE `users` (
   CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`),
   CONSTRAINT `idAccout` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
   CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -402,6 +494,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (9,11,72,1,'19032740','4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D',1),(10,18,79,1,'19032740','32134','Pradel','Eugene','Ovidio Lagos 124',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,29 +575,40 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser`(
 	in phone varchar(20), in firstName varchar(50), in lastName varchar(50),
-	in address varchar(150), in typeDocument varchar(20), in docNumber varchar(20),
+	in address varchar(150), in idDocumentType int, in docNumber varchar(20),
     in idRole int, in userName varchar(50), in userPass varchar(500),
-    in idCountry int, in idProvince int, in idcity int)
+    in idCountry int, in idProvince int, in idcity int, in e_mail varchar(25))
 begin
 	declare idLocation int;
 	declare _idaccount int;
+    DECLARE track_no INT DEFAULT 0;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+	BEGIN  
+	GET DIAGNOSTICS CONDITION 1 @ERRNO = MYSQL_ERRNO, @MESSAGE_TEXT = MESSAGE_TEXT;
+    SELECT '303' AS status,  @MESSAGE_TEXT AS message;
+	ROLLBACK;
+	END;
+
+	START TRANSACTION;
     
 	insert into locations(idCountry, idProvince,idCity,state)
     values(idCountry, idProvince, idCity,1);
     SET idLocation = (SELECT LAST_INSERT_ID());
     
-    insert into accounts(idRole, idTypeUser, userName, userPass, state)
-    values(idRole, 1, userName, userPass, 1);
+    insert into accounts(idRole, idTypeUser, userName, userPass, e_mail, creationDate, state)
+    values(idRole, 2, userName, userPass, e_mail, CURDATE(), 1);
     SET _idaccount = (SELECT LAST_INSERT_ID());
     
-    insert into users(idAccount, idLocation, phone, firstName, lastName, address, typeDocument, docNumber, state)
-    values(_idaccount, idLocation, phone, firstName, lastName, address, typeDocument, docNumber, 1);    
+    insert into users(idAccount, idLocation, phone, firstName, lastName, address, idDocumentType, docNumber, state)
+    values(_idaccount, idLocation, phone, firstName, lastName, address, idDocumentType, docNumber, 1);    
+      SELECT '203' AS status, "El usuario fue guardo con exito" AS message;
+   COMMIT;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -556,13 +660,13 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllAccount`(in _idPrincipal int)
 begin
-	select acc.userName, rol.name as rol, acc.creationDate from accounts acc
+	select acc.userName, rol.name as rol, acc.creationDate, bra.address as sucursal from accounts acc
     inner join branchusers brauser on brauser.idAccount = acc.id
     inner join typeuserses typerusr on acc.idTypeUser = typerusr.id
     inner join branches bra on bra.id = brauser.idBranch
@@ -618,4 +722,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-15 23:44:42
+-- Dump completed on 2021-07-17  0:13:21

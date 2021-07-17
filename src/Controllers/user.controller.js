@@ -23,21 +23,22 @@ export const GetById = (req, res) =>{
     });    
 }
 export const createUser = (req, res) =>{
-    const { phone, firstName, lastName, address, typeDocument,docNumber, idRole,userName,userPass,idCountry,idProvince,idcity } = req.body;
+    const { phone, firstName, lastName, address, idDocumentType,docNumber, idRole,userName,userPass,idCountry,idProvince,idcity, e_mail } = req.body;
     const query = `
-    CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `
-    const pass = ""; 
+    console.log("phone " + phone + " firstName " + firstName);
     encripto.encryptPassword(userPass).then(val =>{
-        mysqlconnection.query(query,[phone, firstName, lastName, address, typeDocument, docNumber, idRole,userName,val, idCountry, idProvince,idcity], (err, rows, fields) =>{
-            if(!err){          
+        mysqlconnection.query(query,[phone, firstName, lastName, address, idDocumentType, docNumber, idRole,userName,val, idCountry, idProvince,idcity, e_mail], (err, rows, fields) =>{
+            let result =rows[0];
+            if(result[0].status != "303"){          
                 return res.json({
-                    status: 201,
-                    message:'El usuario fue guardo con exito '
+                    status: result[0].status,
+                    message:result[0].message 
                 });
             }
             else{
-                res.json(err);
+                res.json(result);
             }
         });
     });
@@ -46,10 +47,9 @@ export const createUser = (req, res) =>{
 export const updateUser = (req, res) =>{
     const { phone, firstName, lastName, address, typeDocument,docNumber, idRole,idCountry,idProvince,idcity } = req.body;
     const { id } = req.params;
-    const query = `
-    CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-    `
-    mysqlconnection.query(query,[id, phone, firstName, lastName, address,typeDocument,docNumber,idRole,idCountry,idProvince,idcity], (err, rows, fields) =>{
+    mysqlconnection.query(`UPDATE users SET phone = ${phone}, firstName = ${firstName}, lastName = ${lastName}, 
+                address = ${address},typeDocument = ${typeDocument},docNumber = ${docNumber},idRole = ${idRole},idCountry = ${idCountry},
+                idProvince = ${idProvince},idcity = ${idcity}  WHERE id = ${id}`, (err, rows, fields) =>{
         if(!err){
             res.json({
                 status: 201,

@@ -4,7 +4,7 @@ import * as provincecontroller from '../Controllers/province.controller';
 const router = Router();
 
 //Get All user
-router.get('/',provincecontroller.GetALl);
+router.get('/',provincecontroller.GetAll);
 // [authjwt.verifyToken, authjwt.isAdmin],
 //Get by id
 router.get('/:id', provincecontroller.GetById);

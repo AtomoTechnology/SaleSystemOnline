@@ -5,8 +5,8 @@ import jwt from 'jsonwebtoken';
 import mysqlconnection from '../DB/db'; 
 
 export const GetAll = (req, res) =>{
-    debugger;
-    mysqlconnection.query(`CALL GetAllAccount(?)`,[req.query.filter],(err, rows, fields) =>{
+    const _idPrincipal =req.query.idBusiness;
+    mysqlconnection.query(`CALL GetAllAccount(?)`,[_idPrincipal],(err, rows, fields) =>{
         if(!err){
             res.json(rows);
         }
