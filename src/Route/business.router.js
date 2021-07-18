@@ -12,11 +12,17 @@ router.get('/:id', businesscontroller.GetById);
 //Create
 router.post(
 	'/',
-	// [
-	//     validator.checkUserNameNoneRepeat,validator.isUserValid,validator.isPassValid,
-	//     validator.IsmailValid,  validator.IsmailaccountValid, validator.EmailNoneRepeat, validator.EmailNoneRepeatBusiness,
-	//     validator.PhoneBusinesNoneRepeat, validator.PhoneNoneRepeat
-	// ],
+	[
+		validator.checkUserNameNoneRepeat,
+		validator.isUserValid,
+		validator.isPassValid,
+		validator.IsmailValid,
+		validator.IsmailaccountValid,
+		validator.EmailNoneRepeat,
+		validator.EmailNoneRepeatBusiness,
+		validator.PhoneBusinesNoneRepeat,
+		validator.PhoneNoneRepeat,
+	],
 	businesscontroller.Post
 );
 
