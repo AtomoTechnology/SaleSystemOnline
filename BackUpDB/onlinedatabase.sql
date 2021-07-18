@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `onlinedatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE  IF NOT EXISTS `onlinedatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `onlinedatabase`;
--- MariaDB dump 10.19  Distrib 10.4.19-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: onlinedatabase
+-- Host: localhost    Database: onlinedatabase
 -- ------------------------------------------------------
--- Server version	10.4.19-MariaDB
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,14 +23,14 @@ USE `onlinedatabase`;
 
 DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idRole` int(11) NOT NULL,
-  `idTypeUser` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idRole` int NOT NULL,
+  `idTypeUser` int NOT NULL,
   `userName` varchar(50) NOT NULL,
   `userPass` varchar(500) DEFAULT NULL,
-  `e_mail` varchar(50) DEFAULT NULL,
+  `e_mail` varchar(100) DEFAULT NULL,
   `creationDate` datetime DEFAULT NULL,
   `finalDate` datetime DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `accounts` (
   KEY `idTypeUser_idx` (`idTypeUser`),
   CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `roles` (`id`),
   CONSTRAINT `idTypeUser` FOREIGN KEY (`idTypeUser`) REFERENCES `typeuserses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (11,1,1,'prade516','$2a$10$0FSI/46vUuXE4dRDdvIcs.0U4VAMoOswlKZhsb3kPh4b32qvq5Cuy','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(18,1,2,'prade5_16','$2a$10$WreNSux3dXnvC8KIitJXGuuQbRW4mNvE5dE9oV/SlvVs357AaHRN6','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1');
+INSERT INTO `accounts` VALUES (11,1,1,'prade516','$2a$10$0FSI/46vUuXE4dRDdvIcs.0U4VAMoOswlKZhsb3kPh4b32qvq5Cuy','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(18,1,2,'prade5_16','$2a$10$WreNSux3dXnvC8KIitJXGuuQbRW4mNvE5dE9oV/SlvVs357AaHRN6','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(19,1,1,'jhmesserouxBusiness','$2a$10$65kdhpEmJst/c2QNbDUn9.5pjrW5lIx6n.Ty0ys0uRQ9SjSOoaZ2a','Abc123.pk','2021-07-18 00:00:00',NULL,'1'),(20,1,1,'jhmesseroux','$2a$10$NsHLemJPX0fMwwu3VA8WL.Etv2AZ3oo88Zcn7pkJHqtXJTM8DZPGe','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(22,1,1,'jhmesserouxbaljh','$2a$10$Jlf.t7BtnAPBVYBHbi7q8uU215QuP9WFvVBlmVENMdc0Z4GNp.FaO','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(23,1,1,'gggggyg','$2a$10$QFiUlujY5UVgkBg.MuHJH.Z1euvNopv2D1bRcXMmj.kelrSC/Qe0a','messerouxhilairyghe@gmail.com','2021-07-18 00:00:00',NULL,'1'),(24,1,2,'etryrt','$2a$10$eTw/kHEOi1T5SmWk99msgecaiK9yh6nBJV6RFxnj7vdz7T6JDQv6m','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(25,1,2,'jamesLeBon','$2a$10$av7ubRLhi1aVCMnVQyneI.SYQp80.A6nLOqugPlH5k1rSWL4bJV.q','jkjhjs@gmail.com','2021-07-18 00:00:00',NULL,'1');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,21 +59,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `branches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `branches` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idBusiness` int(11) DEFAULT NULL,
-  `idLocation` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idBusiness` int DEFAULT NULL,
+  `idLocation` int DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `e_mail` varchar(25) DEFAULT NULL,
+  `e_mail` varchar(100) DEFAULT NULL,
   `postal_code` varchar(15) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_idx1` (`idBusiness`),
   KEY `id_idx2` (`idLocation`),
   CONSTRAINT `idBusiness` FOREIGN KEY (`idBusiness`) REFERENCES `businesses` (`id`),
   CONSTRAINT `idLocation` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `branches` (
 
 LOCK TABLES `branches` WRITE;
 /*!40000 ALTER TABLE `branches` DISABLE KEYS */;
-INSERT INTO `branches` VALUES (10,62,71,'Ovidio Lagos 124','prade516@gmail.com','2000',1),(11,62,71,'dddd','dddd','233',1);
+INSERT INTO `branches` VALUES (10,62,71,'Ovidio Lagos 124','prade516@gmail.com','2000',1),(11,62,71,'dddd','dddd','233',1),(12,63,87,'sarmiento 1247','messerouxhilaiyfre@gmail.com','2000',1),(13,64,98,'sarmiento 1247','messerouxhilaire@gmail.com','2000',1),(15,67,102,'sarmiento 1247','messerouxhilaire@gmail.com','2000',1),(16,69,105,'sarmiento 1247','messerouxhilaghire@gmail.cjom','2000',1);
 /*!40000 ALTER TABLE `branches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,12 +92,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `branchusers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `branchusers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idBranch` int(11) NOT NULL,
-  `idAccount` int(11) NOT NULL,
-  `state` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idBranch` int NOT NULL,
+  `idAccount` int NOT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idBranch_branchuser` (`idBranch`),
   KEY `idAccount_branchuser` (`idAccount`),
@@ -105,7 +105,7 @@ CREATE TABLE `branchusers` (
   KEY `idAccount_branchusers` (`idAccount`),
   CONSTRAINT `Account_branchuser` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
   CONSTRAINT `Branch_branchuser` FOREIGN KEY (`idBranch`) REFERENCES `branches` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `branchusers` (
 
 LOCK TABLES `branchusers` WRITE;
 /*!40000 ALTER TABLE `branchusers` DISABLE KEYS */;
-INSERT INTO `branchusers` VALUES (8,10,11,1),(9,11,11,1);
+INSERT INTO `branchusers` VALUES (8,10,11,1),(9,11,11,1),(10,12,19,1),(11,13,20,1),(12,15,22,1),(13,16,23,1);
 /*!40000 ALTER TABLE `branchusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,17 +124,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `businesses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `businesses` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `businessName` varchar(200) NOT NULL,
   `cuit_cuil` varchar(15) DEFAULT NULL,
-  `logo` varchar(5000) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `logo` longtext,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `businessName_UNIQUE` (`businessName`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `businesses` (
 
 LOCK TABLES `businesses` WRITE;
 /*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
-INSERT INTO `businesses` VALUES (62,'AtomoTecho','20-19032740-0','Sin logo',1);
+INSERT INTO `businesses` VALUES (62,'AtomoTecho','20-19032740-0','Sin logo',1),(63,'JHMesserx','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(64,'JHMesseroux','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(67,'JHMesserouxBlabla','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(69,'JHMesserouxBlabwww','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1);
 /*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,14 +153,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(250) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,17 +179,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cities` (
-  `id` int(11) NOT NULL,
-  `idProvince` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `idProvince` int NOT NULL,
   `name` varchar(40) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idProvince_idx` (`idProvince`),
   CONSTRAINT `idProvince` FOREIGN KEY (`idProvince`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,15 +208,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `countries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,14 +235,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `documenttypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `documenttypes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(150) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,26 +261,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `locations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCountry` int(11) NOT NULL,
-  `idProvince` int(11) NOT NULL,
-  `idCity` int(11) NOT NULL,
-  `state` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCountry` int NOT NULL,
+  `idProvince` int NOT NULL,
+  `idCity` int NOT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Province_location` (`idProvince`),
-  KEY `City_location` (`idCity`),
   KEY `Country_locations` (`idCountry`),
   KEY `Province_locations` (`idProvince`),
   KEY `City_locations` (`idCity`),
   KEY `Country_locationss` (`idCountry`),
   KEY `Province_locationss` (`idProvince`),
   KEY `City_locationss` (`idCity`),
-  CONSTRAINT `City` FOREIGN KEY (`idCity`) REFERENCES `countries` (`id`),
+  CONSTRAINT `City` FOREIGN KEY (`idCity`) REFERENCES `cities` (`id`),
   CONSTRAINT `Country` FOREIGN KEY (`idCountry`) REFERENCES `countries` (`id`),
   CONSTRAINT `Province` FOREIGN KEY (`idProvince`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +288,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (71,1,1,1,1),(72,1,1,1,1),(79,1,1,1,1);
+INSERT INTO `locations` VALUES (71,1,1,1,1),(72,1,1,1,1),(79,1,1,1,1),(87,1,1,1,1),(88,1,1,1,1),(98,1,25,2381,1),(99,1,22,2104,1),(102,1,25,2382,1),(103,1,22,1929,1),(105,1,25,2382,1),(106,1,22,2104,1),(107,1,24,2272,1),(108,1,24,2271,1);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,14 +298,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `phones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `phones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idBranch` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idBranch` int DEFAULT NULL,
   `phonenumber` varchar(20) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,7 +314,7 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-INSERT INTO `phones` VALUES (8,10,'32134',1);
+INSERT INTO `phones` VALUES (8,10,'32134',1),(9,12,'0341720657882',1),(10,13,'03417207882',1),(11,15,'03417207882',1),(12,16,'0341720788323',1);
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,16 +324,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `priceproducts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `priceproducts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idproduct` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idproduct` int NOT NULL,
   `price` decimal(18,2) NOT NULL,
   `creationDate` date DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `stock` int DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,21 +351,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCategory` int(11) NOT NULL,
-  `idAccount` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCategory` int NOT NULL,
+  `idAccount` int DEFAULT NULL,
   `productCode` varchar(50) NOT NULL,
   `productName` varchar(100) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `imagen` longtext DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `stock` int DEFAULT NULL,
+  `imagen` longtext,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category` (`idCategory`),
-  CONSTRAINT `category` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `category` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,17 +383,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `provinces`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `provinces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCountry` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCountry` int NOT NULL,
   `name` varchar(40) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idCountry_idx` (`idCountry`),
   CONSTRAINT `idCountry` FOREIGN KEY (`idCountry`) REFERENCES `countries` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -413,17 +412,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
   `creationDate` datetime DEFAULT NULL,
-  `state` int(11) NOT NULL,
+  `state` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,13 +441,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `typeuserses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `typeuserses` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -467,27 +466,27 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idAccount` int(11) NOT NULL,
-  `idLocation` int(11) NOT NULL,
-  `idDocumentType` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idAccount` int NOT NULL,
+  `idLocation` int NOT NULL,
+  `idDocumentType` int DEFAULT NULL,
   `docNumber` varchar(15) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `address` varchar(150) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idAccount_user` (`idAccount`),
   KEY `idLocation_idx` (`idLocation`),
   KEY `idLocation_user` (`idLocation`),
   KEY `idDocumentType_user` (`idDocumentType`),
-  CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`),
   CONSTRAINT `idAccout` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
-  CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`),
+  CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -496,7 +495,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (9,11,72,1,'19032740','4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D',1),(10,18,79,1,'19032740','32134','Pradel','Eugene','Ovidio Lagos 124',1);
+INSERT INTO `users` VALUES (9,11,72,1,'19032740','4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D',1),(10,18,79,1,'19032740','32134','Pradel','Eugene','Ovidio Lagos 124',1),(11,19,88,1,'95904838','03417203456','Jean','Messeroux','sarmien6gfto 1247',1),(12,20,99,1,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(13,22,103,NULL,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(14,23,106,NULL,'78959576','03417207882455','Jean','Messeroux','sarmiento 1247',1),(15,24,107,2,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(16,25,108,2,'95904838','03417207882','Jean','Messeroux','sarmiento 1247',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,16 +508,16 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createBusiness`(
 	in businessName varchar(200), in firstName varchar(50), in lastName varchar(50), 
-	in address varchar(100),in addressuser varchar(150), in idDocumentType int, in docNumber varchar(20), in logo varchar(5000),
+	in address varchar(100),in addressuser varchar(150), in idDocumentType int, in docNumber varchar(20), in logo longtext,
 	in idCountry int, in idProvince int, in idCity int, in phoneBusiness varchar(20),
     in phoneuser varchar(20), in idRole int, in idCountryuser int, in idProvinceuser int, in idcityuser int, in userName varchar(50), 
-    in userPass varchar(500), in postal_code varchar(15), in e_mail varchar(25), in cuit_cuil varchar(15), in e_mailaccount varchar(50))
+    in userPass varchar(500), in postal_code varchar(15), in e_mail varchar(100), in cuit_cuil varchar(15), in e_mailaccount varchar(100))
 begin
 	declare idLocation int;
 	declare idLocationuser int;
@@ -618,15 +617,15 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser`(
-	in phone varchar(20), in firstName varchar(50), in lastName varchar(50),
+	in phone varchar(20), in firstName varchar(150), in lastName varchar(150),
 	in address varchar(150), in idDocumentType int, in docNumber varchar(20),
     in idRole int, in userName varchar(50), in userPass varchar(500),
-    in idCountry int, in idProvince int, in idcity int, in e_mail varchar(25))
+    in idCountry int, in idProvince int, in idcity int, in e_mail varchar(100))
 begin
 	declare idLocation int;
 	declare _idaccount int;
@@ -765,4 +764,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-17 18:46:46
+-- Dump completed on 2021-07-18 18:03:27
