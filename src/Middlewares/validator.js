@@ -192,7 +192,7 @@ export const PhoneNoneRepeat = (req, res, next) =>{
 
 export const PhoneBusinesNoneRepeat = (req, res, next) =>{
     mysqlconnection.query('SELECT * FROM phones WHERE state = 1 and phonenumber =?', [req.body.phoneBusiness], (err, rows, fields) =>{     
-        if(rows != null){
+        if(rows.length > 0){
             return res.json({
                 status:config.invalid_error_Code,
                 error:"error",
