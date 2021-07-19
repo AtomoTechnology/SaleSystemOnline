@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `onlinedatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `onlinedatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `onlinedatabase`;
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MariaDB dump 10.19  Distrib 10.4.19-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: onlinedatabase
+-- Host: 127.0.0.1    Database: onlinedatabase
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	10.4.19-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,11 +23,11 @@ USE `onlinedatabase`;
 
 DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accounts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idRole` int NOT NULL,
-  `idTypeUser` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idRole` int(11) NOT NULL,
+  `idTypeUser` int(11) NOT NULL,
   `userName` varchar(50) NOT NULL,
   `userPass` varchar(500) DEFAULT NULL,
   `e_mail` varchar(100) DEFAULT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `accounts` (
   KEY `idTypeUser_idx` (`idTypeUser`),
   CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `roles` (`id`),
   CONSTRAINT `idTypeUser` FOREIGN KEY (`idTypeUser`) REFERENCES `typeuserses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,21 +59,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `branches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `branches` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idBusiness` int DEFAULT NULL,
-  `idLocation` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idBusiness` int(11) DEFAULT NULL,
+  `idLocation` int(11) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `e_mail` varchar(100) DEFAULT NULL,
   `postal_code` varchar(15) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_idx1` (`idBusiness`),
   KEY `id_idx2` (`idLocation`),
   CONSTRAINT `idBusiness` FOREIGN KEY (`idBusiness`) REFERENCES `businesses` (`id`),
   CONSTRAINT `idLocation` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,12 +92,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `branchusers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `branchusers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idBranch` int NOT NULL,
-  `idAccount` int NOT NULL,
-  `state` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idBranch` int(11) NOT NULL,
+  `idAccount` int(11) NOT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idBranch_branchuser` (`idBranch`),
   KEY `idAccount_branchuser` (`idAccount`),
@@ -105,7 +105,7 @@ CREATE TABLE `branchusers` (
   KEY `idAccount_branchusers` (`idAccount`),
   CONSTRAINT `Account_branchuser` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
   CONSTRAINT `Branch_branchuser` FOREIGN KEY (`idBranch`) REFERENCES `branches` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,17 +124,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `businesses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `businesses` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `businessName` varchar(200) NOT NULL,
   `cuit_cuil` varchar(15) DEFAULT NULL,
-  `logo` longtext,
-  `state` int DEFAULT NULL,
+  `logo` longtext DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `businessName_UNIQUE` (`businessName`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,14 +153,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(250) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,17 +179,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cities` (
-  `id` int NOT NULL,
-  `idProvince` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `idProvince` int(11) NOT NULL,
   `name` varchar(40) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idProvince_idx` (`idProvince`),
   CONSTRAINT `idProvince` FOREIGN KEY (`idProvince`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,15 +208,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `countries` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,14 +235,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `documenttypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `documenttypes` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(150) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,13 +261,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `locations` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idCountry` int NOT NULL,
-  `idProvince` int NOT NULL,
-  `idCity` int NOT NULL,
-  `state` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCountry` int(11) NOT NULL,
+  `idProvince` int(11) NOT NULL,
+  `idCity` int(11) NOT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Province_location` (`idProvince`),
   KEY `Country_locations` (`idCountry`),
@@ -279,7 +279,7 @@ CREATE TABLE `locations` (
   CONSTRAINT `City` FOREIGN KEY (`idCity`) REFERENCES `cities` (`id`),
   CONSTRAINT `Country` FOREIGN KEY (`idCountry`) REFERENCES `countries` (`id`),
   CONSTRAINT `Province` FOREIGN KEY (`idProvince`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,19 +293,46 @@ INSERT INTO `locations` VALUES (71,1,1,1,1),(72,1,1,1,1),(79,1,1,1,1),(87,1,1,1,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `phoneproviders`
+--
+
+DROP TABLE IF EXISTS `phoneproviders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `phoneproviders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idProvider` int(11) DEFAULT NULL,
+  `phoneNumber` varchar(20) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `provider` (`idProvider`),
+  CONSTRAINT `provider` FOREIGN KEY (`idProvider`) REFERENCES `providers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `phoneproviders`
+--
+
+LOCK TABLES `phoneproviders` WRITE;
+/*!40000 ALTER TABLE `phoneproviders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phoneproviders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `phones`
 --
 
 DROP TABLE IF EXISTS `phones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `phones` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idBranch` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idBranch` int(11) DEFAULT NULL,
   `phonenumber` varchar(20) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,21 +346,46 @@ INSERT INTO `phones` VALUES (8,10,'32134',1),(9,12,'0341720657882',1),(10,13,'03
 UNLOCK TABLES;
 
 --
+-- Table structure for table `presentations`
+--
+
+DROP TABLE IF EXISTS `presentations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `presentations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `presentations`
+--
+
+LOCK TABLES `presentations` WRITE;
+/*!40000 ALTER TABLE `presentations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `presentations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `priceproducts`
 --
 
 DROP TABLE IF EXISTS `priceproducts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `priceproducts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idproduct` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idproduct` int(11) NOT NULL,
   `price` decimal(18,2) NOT NULL,
   `creationDate` date DEFAULT NULL,
-  `stock` int DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,21 +403,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idCategory` int NOT NULL,
-  `idAccount` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCategory` int(11) NOT NULL,
+  `idPresentation` int(11) DEFAULT NULL,
+  `idAccount` int(11) DEFAULT NULL,
   `productCode` varchar(50) NOT NULL,
   `productName` varchar(100) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
-  `stock` int DEFAULT NULL,
-  `imagen` longtext,
-  `state` int DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `imagen` longtext DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category` (`idCategory`),
-  CONSTRAINT `category` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `presentation` (`idPresentation`),
+  CONSTRAINT `category` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`),
+  CONSTRAINT `presentation` FOREIGN KEY (`idPresentation`) REFERENCES `presentations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,22 +433,53 @@ LOCK TABLES `products` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `providers`
+--
+
+DROP TABLE IF EXISTS `providers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `providers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idBusiness` int(11) NOT NULL,
+  `idLocation` int(11) NOT NULL,
+  `fullName` varchar(150) NOT NULL,
+  `cuit_cuil` varchar(15) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `e_mail` varchar(100) DEFAULT NULL,
+  `web` varchar(150) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `providers`
+--
+
+LOCK TABLES `providers` WRITE;
+/*!40000 ALTER TABLE `providers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `providers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `provinces`
 --
 
 DROP TABLE IF EXISTS `provinces`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `provinces` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idCountry` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCountry` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idCountry_idx` (`idCountry`),
   CONSTRAINT `idCountry` FOREIGN KEY (`idCountry`) REFERENCES `countries` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,22 +493,54 @@ INSERT INTO `provinces` VALUES (1,1,'Buenos Aires',NULL,1),(2,1,'Buenos Aires-GB
 UNLOCK TABLES;
 
 --
+-- Table structure for table `returnsrefunds`
+--
+
+DROP TABLE IF EXISTS `returnsrefunds`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `returnsrefunds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idProduct` int(11) NOT NULL,
+  `idProvider` int(11) NOT NULL,
+  `idAccount` int(11) NOT NULL,
+  `reasons` varchar(500) NOT NULL,
+  `creationDate` datetime DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productreturn` (`idProduct`),
+  KEY `providerreturn` (`idProvider`),
+  CONSTRAINT `productreturn` FOREIGN KEY (`idProduct`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `providerreturn` FOREIGN KEY (`idProvider`) REFERENCES `providers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `returnsrefunds`
+--
+
+LOCK TABLES `returnsrefunds` WRITE;
+/*!40000 ALTER TABLE `returnsrefunds` DISABLE KEYS */;
+/*!40000 ALTER TABLE `returnsrefunds` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `roles`
 --
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
   `creationDate` datetime DEFAULT NULL,
-  `state` int NOT NULL,
+  `state` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,13 +559,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `typeuserses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `typeuserses` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -466,27 +584,27 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idAccount` int NOT NULL,
-  `idLocation` int NOT NULL,
-  `idDocumentType` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idAccount` int(11) NOT NULL,
+  `idLocation` int(11) NOT NULL,
+  `idDocumentType` int(11) DEFAULT NULL,
   `docNumber` varchar(15) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `address` varchar(150) DEFAULT NULL,
-  `state` int DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idAccount_user` (`idAccount`),
   KEY `idLocation_idx` (`idLocation`),
   KEY `idLocation_user` (`idLocation`),
   KEY `idDocumentType_user` (`idDocumentType`),
+  CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`),
   CONSTRAINT `idAccout` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
-  CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`),
-  CONSTRAINT `Location_user` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `idDocumentType_user` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -508,7 +626,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -617,7 +735,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -764,4 +882,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-18 18:03:27
+-- Dump completed on 2021-07-18 23:42:05
