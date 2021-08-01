@@ -42,6 +42,12 @@ export const createUser = (req, res) => {
 		idcity,
 		e_mail,
 	} = req.body;
+	if(idCountry == null || idCountry == "" || idCountry == undefined)
+		idCountry = -1;
+	if(idProvince == null || idProvince == "" || idProvince == undefined)
+		idProvince = -1;
+	if(idcity == null || idcity == "" || idcity == undefined)
+		idcity = -1;
 	const query = `
     CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
