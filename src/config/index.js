@@ -12,6 +12,7 @@ import provinceRoute from '../Route/province.router';
 import businessRoute from '../Route/business.router';
 import documentTypeRoute from '../Route/documentType.router';
 import categoryeRoute from '../Route/category.router';
+import branchRoute from '../Route/branch.router';
 // End call Route
 import pkg from '../../package.json';
 import helmet from 'helmet';
@@ -53,6 +54,7 @@ app.use('/api/v1/cities', cityRoute);
 app.use('/api/v1/countries', countryRoute);
 app.use('/api/v1/provinces', provinceRoute);
 app.use('/api/v1/categories', categoryeRoute);
+app.use('/api/v1/branches', branchRoute);
 
 //Starting
 app.listen(app.get('port'), () =>{

@@ -45,8 +45,7 @@ export const signin = (req, res) =>{
                                 role:userfound[0].role, 
                                 idRole:userfound[0].idRole, 
                                 idPrincipal:userfound[0].idPrincipal, 
-                                userName:userfound[0].userName, 
-                                typeUser:userfound[0].typeUser
+                                userName:userfound[0].userName
                             },
                             config.SECRET,{
                                 expiresIn:86400 // vence en un dia

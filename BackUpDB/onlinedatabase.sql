@@ -27,7 +27,6 @@ DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idRole` int(11) NOT NULL,
-  `idTypeUser` int(11) NOT NULL,
   `userName` varchar(50) NOT NULL,
   `userPass` varchar(500) DEFAULT NULL,
   `e_mail` varchar(100) DEFAULT NULL,
@@ -37,9 +36,7 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName_UNIQUE` (`userName`),
   KEY `id_idx` (`idRole`),
-  KEY `idTypeUser_idx` (`idTypeUser`),
-  CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `roles` (`id`),
-  CONSTRAINT `idTypeUser` FOREIGN KEY (`idTypeUser`) REFERENCES `typeuserses` (`id`)
+  CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,7 +46,6 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (11,1,1,'prade516','$2a$10$0FSI/46vUuXE4dRDdvIcs.0U4VAMoOswlKZhsb3kPh4b32qvq5Cuy','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(18,1,2,'prade5_16','$2a$10$WreNSux3dXnvC8KIitJXGuuQbRW4mNvE5dE9oV/SlvVs357AaHRN6','prade516@gmail.com','2021-07-16 00:00:00',NULL,'1'),(19,1,1,'jhmesserouxBusiness','$2a$10$65kdhpEmJst/c2QNbDUn9.5pjrW5lIx6n.Ty0ys0uRQ9SjSOoaZ2a','Abc123.pk','2021-07-18 00:00:00',NULL,'1'),(20,1,1,'jhmesseroux','$2a$10$NsHLemJPX0fMwwu3VA8WL.Etv2AZ3oo88Zcn7pkJHqtXJTM8DZPGe','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(22,1,1,'jhmesserouxbaljh','$2a$10$Jlf.t7BtnAPBVYBHbi7q8uU215QuP9WFvVBlmVENMdc0Z4GNp.FaO','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(23,1,1,'gggggyg','$2a$10$QFiUlujY5UVgkBg.MuHJH.Z1euvNopv2D1bRcXMmj.kelrSC/Qe0a','messerouxhilairyghe@gmail.com','2021-07-18 00:00:00',NULL,'1'),(24,1,2,'etryrt','$2a$10$eTw/kHEOi1T5SmWk99msgecaiK9yh6nBJV6RFxnj7vdz7T6JDQv6m','messerouxhilaire@gmail.com','2021-07-18 00:00:00',NULL,'1'),(25,1,2,'jamesLeBon','$2a$10$av7ubRLhi1aVCMnVQyneI.SYQp80.A6nLOqugPlH5k1rSWL4bJV.q','jkjhjs@gmail.com','2021-07-18 00:00:00',NULL,'1');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,40 +78,7 @@ CREATE TABLE `branches` (
 
 LOCK TABLES `branches` WRITE;
 /*!40000 ALTER TABLE `branches` DISABLE KEYS */;
-INSERT INTO `branches` VALUES (10,62,71,'Ovidio Lagos 124','prade516@gmail.com','2000',1),(11,62,71,'dddd','dddd','233',1),(12,63,87,'sarmiento 1247','messerouxhilaiyfre@gmail.com','2000',1),(13,64,98,'sarmiento 1247','messerouxhilaire@gmail.com','2000',1),(15,67,102,'sarmiento 1247','messerouxhilaire@gmail.com','2000',1),(16,69,105,'sarmiento 1247','messerouxhilaghire@gmail.cjom','2000',1);
 /*!40000 ALTER TABLE `branches` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `branchusers`
---
-
-DROP TABLE IF EXISTS `branchusers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `branchusers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idBranch` int(11) NOT NULL,
-  `idAccount` int(11) NOT NULL,
-  `state` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idBranch_branchuser` (`idBranch`),
-  KEY `idAccount_branchuser` (`idAccount`),
-  KEY `idBranch_branchusers` (`idBranch`),
-  KEY `idAccount_branchusers` (`idAccount`),
-  CONSTRAINT `Account_branchuser` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`),
-  CONSTRAINT `Branch_branchuser` FOREIGN KEY (`idBranch`) REFERENCES `branches` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `branchusers`
---
-
-LOCK TABLES `branchusers` WRITE;
-/*!40000 ALTER TABLE `branchusers` DISABLE KEYS */;
-INSERT INTO `branchusers` VALUES (8,10,11,1),(9,11,11,1),(10,12,19,1),(11,13,20,1),(12,15,22,1),(13,16,23,1);
-/*!40000 ALTER TABLE `branchusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -143,7 +106,6 @@ CREATE TABLE `businesses` (
 
 LOCK TABLES `businesses` WRITE;
 /*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
-INSERT INTO `businesses` VALUES (62,'AtomoTecho','20-19032740-0','Sin logo',1),(63,'JHMesserx','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(64,'JHMesseroux','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(67,'JHMesserouxBlabla','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1),(69,'JHMesserouxBlabwww','7863854662353','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAALiMAAC4jAXilP3YAAAURaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTA3LTA2VDEyOjM4OjMxLTAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OGY2MWM4OTAtZmQ1Ny05OTQ4LWE2YzgtYWNhYTQ0ODY4NDEwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkFkb2JlIFJHQiAoMTk5OCkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjhmNjFjODkwLWZkNTctOTk0OC1hNmM4LWFjYWE0NDg2ODQxMCIgc3RFdnQ6d2hlbj0iMjAyMC0wNy0wNlQxMjozODozMS0wMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5LBguAAAABcElEQVR4nO3RwQkAIBDAMHX/nc8hfEghmaDQPTOLsvM7gFcW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkW5lmYZ2GehXkXvY0EKVRWAB8AAAAASUVORK5CYII=',1);
 /*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,6 +192,42 @@ INSERT INTO `countries` VALUES (1,'Argentina',NULL,1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `customers`
+--
+
+DROP TABLE IF EXISTS `customers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idAccount` int(11) NOT NULL,
+  `idDocumentType` int(11) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `gender` varchar(1) DEFAULT NULL,
+  `documentNumber` varchar(20) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `accountcustomer` (`idAccount`),
+  KEY `doctypecustomer` (`idDocumentType`),
+  CONSTRAINT `accountcustomer` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `doctypecustomer` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customers`
+--
+
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `documenttypes`
 --
 
@@ -253,6 +251,76 @@ LOCK TABLES `documenttypes` WRITE;
 /*!40000 ALTER TABLE `documenttypes` DISABLE KEYS */;
 INSERT INTO `documenttypes` VALUES (1,'DNI','El DNI contiene información sobre su identidad. Pero, lo más importante es que este documento tiene un número personal. El número del DNI es necesario',1),(2,'PASAPORTE','PASAPORTE',1),(3,'L.C','Libreta Cívica',1),(4,'L.E.','Libreta de Enrolamiento',1);
 /*!40000 ALTER TABLE `documenttypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idAccount` int(11) NOT NULL,
+  `idBranch` int(11) DEFAULT NULL,
+  `idDocumentType` int(11) DEFAULT NULL,
+  `idLocation` int(11) DEFAULT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `gender` varchar(1) DEFAULT NULL,
+  `docNumber` varchar(15) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `datebirthday` datetime DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locemp` (`idLocation`),
+  KEY `typrdocemp` (`idDocumentType`),
+  KEY `accemp` (`idAccount`),
+  KEY `branchemp` (`idBranch`),
+  CONSTRAINT `accemp` FOREIGN KEY (`idAccount`) REFERENCES `accounts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `branchemp` FOREIGN KEY (`idBranch`) REFERENCES `branches` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `locemp` FOREIGN KEY (`idLocation`) REFERENCES `locations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `typrdocemp` FOREIGN KEY (`idDocumentType`) REFERENCES `documenttypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employees`
+--
+
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historials`
+--
+
+DROP TABLE IF EXISTS `historials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `historials` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idAccount` int(11) NOT NULL,
+  `idmodule` int(11) NOT NULL,
+  `actionmodule` varchar(45) DEFAULT NULL,
+  `creationDate` datetime DEFAULT NULL,
+  `state` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historials`
+--
+
+LOCK TABLES `historials` WRITE;
+/*!40000 ALTER TABLE `historials` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historials` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -288,8 +356,60 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (71,1,1,1,1),(72,1,1,1,1),(79,1,1,1,1),(87,1,1,1,1),(88,1,1,1,1),(98,1,25,2381,1),(99,1,22,2104,1),(102,1,25,2382,1),(103,1,22,1929,1),(105,1,25,2382,1),(106,1,22,2104,1),(107,1,24,2272,1),(108,1,24,2271,1);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modules`
+--
+
+DROP TABLE IF EXISTS `modules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modules`
+--
+
+LOCK TABLES `modules` WRITE;
+/*!40000 ALTER TABLE `modules` DISABLE KEYS */;
+INSERT INTO `modules` VALUES (1,'Ventas','Todas las ventas',1),(2,'Compras','Todas las compras',1),(3,'Usuarios','Historial de todos los usuarios que fueron dados de alta para los empleados',1),(4,'Empleados','Empleados',1),(5,'Productos','Productos',1),(6,'Clientes','Clientes',1);
+/*!40000 ALTER TABLE `modules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movements`
+--
+
+DROP TABLE IF EXISTS `movements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idtypemovement` int(11) NOT NULL,
+  `idtypeoperation` int(11) NOT NULL,
+  `movementdate` datetime DEFAULT NULL,
+  `amount` decimal(18,2) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movements`
+--
+
+LOCK TABLES `movements` WRITE;
+/*!40000 ALTER TABLE `movements` DISABLE KEYS */;
+/*!40000 ALTER TABLE `movements` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -306,7 +426,7 @@ CREATE TABLE `phoneproviders` (
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `provider` (`idProvider`),
-  CONSTRAINT `provider` FOREIGN KEY (`idProvider`) REFERENCES `providers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `provider` FOREIGN KEY (`idProvider`) REFERENCES `supliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,7 +461,6 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-INSERT INTO `phones` VALUES (8,10,'32134',1),(9,12,'0341720657882',1),(10,13,'03417207882',1),(11,15,'03417207882',1),(12,16,'0341720788323',1);
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +477,7 @@ CREATE TABLE `presentations` (
   `description` varchar(250) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,6 +486,7 @@ CREATE TABLE `presentations` (
 
 LOCK TABLES `presentations` WRITE;
 /*!40000 ALTER TABLE `presentations` DISABLE KEYS */;
+INSERT INTO `presentations` VALUES (1,'En caja','Viene en caja',1),(2,'En botella de Vidrio','vidrio',1),(3,'En bottella plastico','Botella platico',1);
 /*!40000 ALTER TABLE `presentations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,6 +529,7 @@ CREATE TABLE `products` (
   `idCategory` int(11) NOT NULL,
   `idPresentation` int(11) DEFAULT NULL,
   `idAccount` int(11) DEFAULT NULL,
+  `idsuplier` int(11) DEFAULT NULL,
   `productCode` varchar(50) NOT NULL,
   `productName` varchar(100) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
@@ -430,37 +551,6 @@ CREATE TABLE `products` (
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `providers`
---
-
-DROP TABLE IF EXISTS `providers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `providers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idBusiness` int(11) NOT NULL,
-  `idLocation` int(11) NOT NULL,
-  `fullName` varchar(150) NOT NULL,
-  `cuit_cuil` varchar(15) DEFAULT NULL,
-  `address` varchar(150) DEFAULT NULL,
-  `postal_code` varchar(20) DEFAULT NULL,
-  `e_mail` varchar(100) DEFAULT NULL,
-  `web` varchar(150) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `providers`
---
-
-LOCK TABLES `providers` WRITE;
-/*!40000 ALTER TABLE `providers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `providers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -502,16 +592,16 @@ DROP TABLE IF EXISTS `returnsrefunds`;
 CREATE TABLE `returnsrefunds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProduct` int(11) NOT NULL,
-  `idProvider` int(11) NOT NULL,
+  `idSuplier` int(11) NOT NULL,
   `idAccount` int(11) NOT NULL,
   `reasons` varchar(500) NOT NULL,
   `creationDate` datetime DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `productreturn` (`idProduct`),
-  KEY `providerreturn` (`idProvider`),
+  KEY `providerreturn` (`idSuplier`),
   CONSTRAINT `productreturn` FOREIGN KEY (`idProduct`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `providerreturn` FOREIGN KEY (`idProvider`) REFERENCES `providers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `providerreturn` FOREIGN KEY (`idSuplier`) REFERENCES `supliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -540,7 +630,7 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,33 +639,91 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Admin','Drecho en casi todo','2021-07-01 00:00:00',1);
+INSERT INTO `roles` VALUES (1,'Full Administrador','Drecho en casi todo','2021-07-01 00:00:00',1),(2,'Administrador','seccion usuarui','2021-07-01 00:00:00',1),(3,'Cajero','Section','2021-07-01 00:00:00',1),(4,'Almacen','Sector almacen','2021-07-01 00:00:00',1),(5,'Empleado','Empleado','2021-07-01 00:00:00',1);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `typeuserses`
+-- Table structure for table `supliers`
 --
 
-DROP TABLE IF EXISTS `typeuserses`;
+DROP TABLE IF EXISTS `supliers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `typeuserses` (
+CREATE TABLE `supliers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `idBusiness` int(11) NOT NULL,
+  `idLocation` int(11) NOT NULL,
+  `fullName` varchar(150) NOT NULL,
+  `cuit_cuil` varchar(15) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `e_mail` varchar(100) DEFAULT NULL,
+  `web` varchar(150) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `typeuserses`
+-- Dumping data for table `supliers`
 --
 
-LOCK TABLES `typeuserses` WRITE;
-/*!40000 ALTER TABLE `typeuserses` DISABLE KEYS */;
-INSERT INTO `typeuserses` VALUES (1,'Business',1),(2,'User',1);
-/*!40000 ALTER TABLE `typeuserses` ENABLE KEYS */;
+LOCK TABLES `supliers` WRITE;
+/*!40000 ALTER TABLE `supliers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supliers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `typemovements`
+--
+
+DROP TABLE IF EXISTS `typemovements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `typemovements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `typemovements`
+--
+
+LOCK TABLES `typemovements` WRITE;
+/*!40000 ALTER TABLE `typemovements` DISABLE KEYS */;
+INSERT INTO `typemovements` VALUES (1,'Efectivo','Efectivo',1),(2,'Tarjeta de debito','Tarjeta de debito',1),(3,'Tarjeta de credito','Tarjeta de credito',1),(4,'Cheques','Cheques',1),(5,'Nota de credito','Nota de credito',1),(6,'pagare','pagare',1);
+/*!40000 ALTER TABLE `typemovements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `typeoperations`
+--
+
+DROP TABLE IF EXISTS `typeoperations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `typeoperations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `typeoperations`
+--
+
+LOCK TABLES `typeoperations` WRITE;
+/*!40000 ALTER TABLE `typeoperations` DISABLE KEYS */;
+INSERT INTO `typeoperations` VALUES (1,'Ventas','Ventas',1),(2,'Compras','Compras',1),(3,'Apertura de caja','Apertura de caja',1),(4,'Cierre de caja','Cierre de caja',1),(5,'Pagar impuesto','Pagar impuesto',1);
+/*!40000 ALTER TABLE `typeoperations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -613,13 +761,56 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (9,11,72,1,'19032740','4325678','Pradel','Eugene','Riccheri 132 piso 4 oficina D',1),(10,18,79,1,'19032740','32134','Pradel','Eugene','Ovidio Lagos 124',1),(11,19,88,1,'95904838','03417203456','Jean','Messeroux','sarmien6gfto 1247',1),(12,20,99,1,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(13,22,103,NULL,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(14,23,106,NULL,'78959576','03417207882455','Jean','Messeroux','sarmiento 1247',1),(15,24,107,2,'78959576','03417207882','Jean','Messeroux','sarmiento 1247',1),(16,25,108,2,'95904838','03417207882','Jean','Messeroux','sarmiento 1247',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'onlinedatabase'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `createBranch` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createBranch`(in idBusiness int, in address varchar(100), in postal_code varchar(15), in e_mail varchar(100),
+ in idCountry int, in idProvince int, in idCity int, in phone varchar(20))
+BEGIN
+	declare idLocation int;
+	declare idBranch int;
+	declare _idaccount int;
+    
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+	BEGIN  
+	GET DIAGNOSTICS CONDITION 1 @ERRNO = MYSQL_ERRNO, @MESSAGE_TEXT = MESSAGE_TEXT;
+    SELECT '303' AS status,  @MESSAGE_TEXT AS message;
+	ROLLBACK;
+	END;
+    
+    START TRANSACTION;
+	insert into locations(idCountry, idProvince,idCity,state)
+    values(idCountry, idProvince, idCity,1);
+    SET idLocation = (SELECT LAST_INSERT_ID());
+    
+     insert into branches(idBusiness, idLocation, address, e_mail, postal_code, state)
+    values(idBusiness,idLocation, address, e_mail, postal_code, 1);
+    SET idBranch = (SELECT LAST_INSERT_ID());
+    
+	 insert into phones(idBranch, phonenumber, state)
+    values(idBranch,phone,1);
+    
+     SELECT '203' AS status, "La sucursal fue guarda con exito" AS message;
+	COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `createBusiness` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -737,7 +928,7 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser`(
 	in phone varchar(20), in firstName varchar(150), in lastName varchar(150),
@@ -756,13 +947,13 @@ begin
 	END;
 
 	START TRANSACTION;
-    
-	insert into locations(idCountry, idProvince,idCity,state)
-    values(idCountry, idProvince, idCity,1);
-    SET idLocation = (SELECT LAST_INSERT_ID());
-    
-    insert into accounts(idRole, idTypeUser, userName, userPass, e_mail, creationDate, state)
-    values(idRole, 2, userName, userPass, e_mail, CURDATE(), 1);
+    IF(idCountry > 0 and idProvince > 0 and idCity > 0) THEN
+		insert into locations(idCountry, idProvince,idCity,state)
+		values(idCountry, idProvince, idCity,1);
+		SET idLocation = (SELECT LAST_INSERT_ID());
+	END IF;	
+    insert into accounts(idRole, userName, userPass, e_mail, creationDate, state)
+    values(idRole, userName, userPass, e_mail, CURDATE(), 1);
     SET _idaccount = (SELECT LAST_INSERT_ID());
     
     insert into users(idAccount, idLocation, phone, firstName, lastName, address, idDocumentType, docNumber, state)
@@ -844,29 +1035,62 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `logginAccount`(in userName varchar(50))
 begin
 	select acc.id as idAccount, bus.id as idPrincipal, acc.userName, acc.userPass,
-    IF(acc.idTypeUser = 1, 'Business', acc.idTypeUser) as typeUser,
     rol.name as 'role', rol.id as idRole from accounts acc 
-    inner join branchusers bruser on acc.id = bruser.idAccount
-    inner join branches bra on bra.id = bruser.idBranch
+    inner join employees emp on emp.idAccount = acc.id
+    inner join branches bra on bra.id = emp.idBranch
     inner join businesses bus on bus.id = bra.idBusiness
     inner join roles rol on acc.idRole = rol.id
     where acc.userName = userName
     union    
     select acco.id as idAccount, usr.id as idPrincipal, acco.userName, acco.userPass,
-    IF(acco.idTypeUser = 2, 'User', acco.idTypeUser) as typeUser,
     rol.name as 'role', rol.id as idRole from accounts acco
     inner join users usr on acco.id = usr.idAccount
     inner join roles rol on acco.idRole = rol.id
-    where acco.userName = userName; 
-    
+    where acco.userName = userName;     
 end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `updateBranch` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateBranch`(in idBusiness int, in idLocation int, in idBranch int,  in address varchar(100), in postal_code varchar(15), in e_mail varchar(100),
+ in idCountry int, in idProvince int, in idCity int, in phone varchar(20))
+BEGIN    
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+	BEGIN  
+	GET DIAGNOSTICS CONDITION 1 @ERRNO = MYSQL_ERRNO, @MESSAGE_TEXT = MESSAGE_TEXT;
+    SELECT '303' AS status,  @MESSAGE_TEXT AS message;
+	ROLLBACK;
+	END;
+    
+    START TRANSACTION;
+	update locations set idCountry = idCountry, idProvince = idProvince,idCity = idCity where id = idLocation;
+    
+	update branches set address = address, e_mail = e_mail, postal_code = postal_code where id = idBranch;
+    
+	 insert into phones(idBranch, phonenumber, state)
+    values(idBranch,phone,1);
+    
+     SELECT '203' AS status, "La sucursal fue guarda con exito" AS message;
+	COMMIT;
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -882,4 +1106,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-18 23:42:05
+-- Dump completed on 2021-07-31 22:37:24
